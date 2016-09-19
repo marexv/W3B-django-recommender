@@ -1,33 +1,385 @@
-{% extends "app/layout.html" %}
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
 
-{% block content %}
+    <meta name="description" content="">
+    <meta name="author" content="">
 
-<div class="jumbotron">
-    <h1>Django</h1>
-    <p class="lead">Django is a free web framework for building great Web sites and Web applications using HTML, CSS and JavaScript.</p>
-    <p><a href="https://www.djangoproject.com/" class="btn btn-primary btn-large">Learn more &raquo;</a></p>
-</div>
+    <title>W3B Marketing Recommender</title>
+        {% load staticfiles %}
+    <link rel="stylesheet" type="text/css" href="{% static 'app/content/bootstrap.min.css' %}" />
+    <link rel="stylesheet" type="text/css" href="{% static 'app/content/cosmo.min.css' %}" />
+    <link rel="stylesheet" type="text/css" href="{% static 'app/content/site.css' %}" />
+    <link rel="stylesheet" type="text/css" href="{% static 'app/content/bootstrap-select.min.css' %}" />
+    <script src="{% static 'app/scripts/jquery-3.1.0.min.js' %}"></script>
+    <script src="{% static 'app/scripts/modernizr-2.6.2.js' %}"></script>
+    <script src="{% static 'app/scripts/bootstrap-select.min.js' %}"></script>
+    <script src="{% static 'app/scripts/w3bRandom.js' %}"></script>
 
-<div class="row">
-    <div class="col-md-4">
-        <h2>Getting started</h2>
-        <p>
-            Django gives you a powerful, patterns-based way to build dynamic websites that
-            enables a clean separation of concerns and gives you full control over markup
-            for enjoyable, agile development.
-        </p>
-        <p><a class="btn btn-default" href="http://www.djangobook.com/en/2.0/index.html">Learn more &raquo;</a></p>
+
+    <!-- bookmark icon -->
+    <link rel="icon"
+          type="image/png"
+          href="">
+
+</head>
+<body>
+
+    <div class="container">
+        <!-- jumbotron -->
+        <div class="container">
+            <div class="jumbotron" style="background-color:#2c7a5b; color:white;">
+                <h1>
+                    W3B Recommender Demo
+                    <small style="color:black;">alpha</small>
+                </h1>
+            </div>
+        </div>
+        <!-- [jumbotron] -->
+        <!-- Attributes form -->
+        <div class="container">
+            <div class="page-header">
+                <h2>Potential customer information</h2>
+            </div>
+
+            <!--
+            <div class="row" style="margin-bottom:20px;">
+                <div class="col-md-1" style="margin-top:7px;">
+                    <p style="font-size:16px;">SEX:</p>
+                </div>
+                <div class="col-md-5" style="margin-top:7px;">
+                    <label class="radio-inline"><input type="radio" name="optradio">Male</label>
+                    <label class="radio-inline"><input type="radio" name="optradio">Female</label>
+                </div>
+                <div class="col-md-1" style="margin-top:7px;">
+                    <p style="font-size:16px;">AGE:</p>
+                </div>
+                <div class="col-md-5">
+                    <div class="input-group">
+                        <span class="input-group-addon" id="sizing-addon2"></span>
+                        <input id="age" type="text" class="form-control" placeholder="0-120" aria-describedby="sizing-addon2">
+                    </div>
+                </div>
+            </div>
+
+            <select class="form-control selectpicker" data-width="auto" style="margin-bottom:20px;">
+                <option data-hidden="true" style="font-weight:bold;">EDUCATION - Choose one option</option>
+                <option>Less than high school degree</option>
+                <option>High school graduate, diploma or equivalent</option>
+                <option>Trade, technical or vocational training</option>
+                <option>Some college credit, no degree</option>
+                <option>Bachelor's degree</option>
+                <option>Master's degree</option>
+                <option>Professional degree</option>
+                <option>Doctorate degree</option>
+                <option>Other</option>
+            </select>
+
+            <select class="form-control selectpicker" data-width="auto" style="margin-bottom:20px;">
+                <option data-hidden="true" style="font-weight:bold;">EMPLOYMENT STATUS - Choose one option</option>
+                <option>Employed for wages</option>
+                <option>Self-employed</option>
+                <option>Unemployed and looking for work</option>
+                <option>Unemployed and not looking for work</option>
+                <option>Homemaker</option>
+                <option>Student</option>
+                <option>Military</option>
+                <option>Retired</option>
+                <option>Unable to work</option>
+                <option>Other</option>
+            </select>
+
+            <select class="form-control selectpicker" data-width="auto" style="margin-bottom:20px;">
+                <option data-hidden="true" style="font-weight:bold;">TYPE OF RESIDENCE - Choose one option</option>
+                <option>Rural area</option>
+                <option>Suburban area</option>
+                <option>Urban area</option>
+            </select>
+        </div>
+        -->
+
+        <!--
+        <div class="container">
+            <div class="page-header">
+                <h2>Threshold selector <small>pre-alpha</small></h2>
+            </div>
+
+            <div class="row" style="margin-bottom:20px;">
+                <div class="col-md-3">
+                    <p>True positive cost</p>
+                </div>
+                <div class="col-md-3">
+                    <div class="input-group">
+                        <input id="truePositiveCost" type="text" class="form-control" placeholder="example... 1000" aria-describedby="sizing-addon2">
+                        <span class="input-group-addon" id="sizing-addon2">€</span>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <p>False positive cost</p>
+                </div>
+                <div class="col-md-3">
+                    <div class="input-group">
+                        <input id="falsePositiveCost" type="text" class="form-control" placeholder="example... 1000" aria-describedby="sizing-addon2">
+                        <span class="input-group-addon" id="sizing-addon2">€</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row" style="margin-bottom:20px;">
+                <div class="col-md-3">
+                    <p>False negative cost</p>
+                </div>
+                <div class="col-md-3">
+                    <div class="input-group">
+                        <input id="falseNegativeCost" type="text" class="form-control" placeholder="example... 1000" aria-describedby="sizing-addon2">
+                        <span class="input-group-addon" id="sizing-addon2">€</span>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <p>True negative cost</p>
+                </div>
+                <div class="col-md-3">
+                    <div class="input-group">
+                        <input id="trueNEgativeCost" type="text" class="form-control" placeholder="example... 1000" aria-describedby="sizing-addon2">
+                        <span class="input-group-addon" id="sizing-addon2">€</span>
+                    </div>
+                </div>
+            </div>
+                    -->
+        </div>
+
+        <!-- [Attributes form]-->
+        <div class="container">
+            <div class="row">
+                <form action="/" method="post">
+                    {% csrf_token %}
+                    {{ form.sex }}
+                    {{ form.age }}
+                    {{ form.education }}
+                    {{ form.employment }}
+                    {{ form.residence }}
+                    {{ form.threshold }}
+                <input type="submit" value="Get prediction" />                 
+                </form>
+            </div>
+        </div>
+
+        <!-- Get prediction -->
+        <!--
+        <div class="container">
+            <div id="getPrediction" onclick="randomNumbers()" class="btn btn-default form-control" style="background-color:#2c7a5b; color:white; border-color:#2c7a5b;">GET PREDICTION</div>
+        </div>
+        -->
+        <!-- [Get prediction] -->
+        <!-- Predictions -->
+        <div class="container">
+
+            <div class="page-header">
+                <h2>Predicted interests</h2>
+            </div>
+
+            <!-- Efficient use of wood -->
+            <div class="row">
+                <div class="col-md-4">
+                    <p>Efficient use of wood</p>
+                </div>
+
+                <div id="toi1label" class="col-md-1">
+                    <p></p>
+                </div>
+
+                <div id="toi1prob" class="col-md-1">
+                    <p>{{ prob1 }}</p>
+                </div>
+
+                <div class="col-md-6">
+                    <div class="threshold" style="width:2px; height:24px; background-color:#cccccc; margin-left:{{ threshold }}%; margin-bottom:-16px;"></div>
+                    <div class="progress">
+                        <div id="toi1bar" class="progress-bar" role="progressbar" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100" style="width: {{ prob1 }}%">
+                            <span class="sr-only">40% Complete (success)</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- [Efficient use of wood] -->
+            <!-- Building with wood -->
+            <div class="row">
+                <div class="col-md-4">
+                    <p> Building with wood </p>
+                </div>
+
+                <div id="toi2label" class="col-md-1">
+                    <p></p>
+                </div>
+
+                <div id="toi2prob" class="col-md-1">
+                    <p>{{ prob2 }}</p>
+                </div>
+
+                <div class="col-md-6">
+                    <div class="threshold" style="width:2px; height:24px; background-color:#cccccc; margin-left:{{ threshold }}%; margin-bottom:-16px;"></div>
+                    <div class="progress">
+                        <div id="toi2bar" class="progress-bar" role="progressbar" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100" style="width: {{ prob2 }}%">
+                            <span class="sr-only">40% Complete (success)</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- [Building with wood] -->
+            <!-- Added value products -->
+            <div class="row">
+                <div class="col-md-4">
+                    <p> Added value products </p>
+                </div>
+
+                <div id="toi3label" class="col-md-1">
+                    <p></p>
+                </div>
+
+                <div id="toi3prob" class="col-md-1">
+                    <p>{{ prob3 }}</p>
+                </div>
+
+                <div class="col-md-6">
+                    <div class="threshold" style="width:2px; height:24px; background-color:#cccccc; margin-left:{{ threshold }}%; margin-bottom:-16px;"></div>
+                    <div class="progress">
+                        <div id="toi3bar" class="progress-bar" role="progressbar" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100" style="width: {{ prob3 }}%">
+                            <span class="sr-only">40% Complete (success)</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- [Added value products] -->
+            <!-- Forests and Economy -->
+            <div class="row">
+                <div class="col-md-4">
+                    <p> Forests and Economy </p>
+                </div>
+
+                <div id="toi4label" class="col-md-1">
+                    <p></p>
+                </div>
+
+                <div id="toi4prob" class="col-md-1">
+                    <p>{{ prob4 }}</p>
+                </div>
+
+                <div class="col-md-6">
+                    <div class="threshold" style="width:2px; height:24px; background-color:#cccccc; margin-left:{{ threshold }}%; margin-bottom:-16px;"></div>
+                    <div class="progress">
+                        <div id="toi4bar" class="progress-bar" role="progressbar" aria-valuenow="80" aria-valuemin="0" aria-valuemax="100" style="width: {{ prob4 }}%">
+                            <span class="sr-only">80% Complete (danger)</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- [Forests and Economy] -->
+            <!-- Forests and global warming -->
+            <div class="row">
+                <div class="col-md-4">
+                    <p> Forests and global warming </p>
+                </div>
+
+                <div id="toi5label" class="col-md-1">
+                    <p></p>
+                </div>
+
+                <div id="toi5prob" class="col-md-1">
+                    <p>{{ prob5 }}</p>
+                </div>
+
+                <div class="col-md-6">
+                    <div class="threshold" style="width:2px; height:24px; background-color:#cccccc; margin-left:{{ threshold }}%; margin-bottom:-16px;"></div>
+                    <div class="progress">
+                        <div id="toi5bar" class="progress-bar" role="progressbar" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100" style="width: {{ prob5 }}%">
+                            <span class="sr-only">40% Complete (success)</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- [Forests and global warming] -->
+            <!-- Conservation by production -->
+            <div class="row">
+                <div class="col-md-4">
+                    <p> Conservation by production </p>
+                </div>
+
+                <div id="toi6label" class="col-md-1">
+                    <p></p>
+                </div>
+
+                <div id="toi6prob" class="col-md-1">
+                    <p>{{ prob6 }}</p>
+                </div>
+
+                <div class="col-md-6">
+                    <div class="threshold" style="width:2px; height:24px; background-color:#cccccc; margin-left:{{ threshold }}%; margin-bottom:-16px;"></div>
+                    <div class="progress">
+                        <div id="toi6bar" class="progress-bar" role="progressbar" aria-valuenow="80" aria-valuemin="0" aria-valuemax="100" style="width: {{ prob6 }}%">
+                            <span class="sr-only">80% Complete (danger)</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- [Conservation by production] -->
+            <!-- Multifunctional forestry and forest ecosystems -->
+            <div class="row">
+                <div class="col-md-4">
+                    <p>  Multifunctional forestry and forest ecosystems </p>
+                </div>
+
+                <div id="toi7label" class="col-md-1">
+                    <p></p>
+                </div>
+
+                <div id="toi7prob" class="col-md-1">
+                    <p>{{ prob7 }}</p>
+                </div>
+
+                <div class="col-md-6">
+                    <div class="threshold" style="width:2px; height:24px; background-color:#cccccc; margin-left:{{ threshold }}%; margin-bottom:-16px;"></div>
+                    <div class="progress">
+                        <div id="toi7bar" class="progress-bar" role="progressbar" aria-valuenow="80" aria-valuemin="0" aria-valuemax="100" style="width: {{ prob7 }}%">
+                            <span class="sr-only">80% Complete (danger)</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- [ Multifunctional forestry and forest ecosystems ] -->
+            <!-- Wood based inovations -->
+            <div class="row">
+                <div class="col-md-4">
+                    <p>Wood based inovations</p>
+                </div>
+
+                <div id="toi8label" class="col-md-1">
+                    <p></p>
+                </div>
+
+                <div id="toi8prob" class="col-md-1">
+                    <p>{{ prob8 }}</p>
+                </div>
+
+                <div class="col-md-6">
+                    <div class="threshold" style="width:2px; height:24px; background-color:#cccccc; margin-left:{{ threshold }}%; margin-bottom:-16px;"></div>
+                    <div class="progress">
+                        <div id="toi8bar" class="progress-bar" role="progressbar" aria-valuenow="80" aria-valuemin="0" aria-valuemax="100" style="width: {{ prob8 }}%">
+                            <span class="sr-only">80% Complete (danger)</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- [ Wood based inovations ] -->
+        </div>
+        <!--  [ Predictions ] -->
+
+        <div class="container">
+            <div onclick="reloadPage(true)" class="btn btn-default form-control" style="background-color:#2c7a5b; color:white; border-color:#2c7a5b;">RESET ALL</div>
+        </div>
     </div>
-    <div class="col-md-4">
-        <h2>Get more libraries</h2>
-        <p>The Python Package Index is a repository of software for the Python programming language.</p>
-        <p><a class="btn btn-default" href="https://pypi.python.org/pypi">Learn more &raquo;</a></p>
-    </div>
-    <div class="col-md-4">
-        <h2>Microsoft Azure</h2>
-        <p>You can easily publish to Microsoft Azure using Python Tools for Visual Studio. Find out how you can host your application using a free trial today.</p>
-        <p><a class="btn btn-default" href="http://azure.microsoft.com">Learn more &raquo;</a></p>
-    </div>
-</div>
-
-{% endblock %}
+</body>
+</html>
