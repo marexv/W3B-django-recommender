@@ -56,7 +56,14 @@ def about(request):
 
 
 #Our view
+clf1 = joblib.load('app/MLmodels/model1/clf1.pkl') 
+clf2 = joblib.load('app/MLmodels/model2/clf2.pkl') 
+clf3 = joblib.load('app/MLmodels/model3/clf3.pkl') 
+clf4 = joblib.load('app/MLmodels/model4/clf4.pkl') 
+clf5 = joblib.load('app/MLmodels/model5/clf5.pkl') 
+clf6 = joblib.load('app/MLmodels/model6/clf6.pkl') 
 clf7 = joblib.load('app/MLmodels/model7/clf7.pkl') 
+clf8 = joblib.load('app/MLmodels/model8/clf8.pkl') 
 
 df = pd.DataFrame(np.zeros((1,23)),columns=['Sex_Female', 'Sex_Male', 'typeOfResidence_City or urban area',
        'typeOfResidence_Rural area', 'typeOfResidence_Suburban area',
@@ -79,6 +86,7 @@ def w3b(request):
             # process the data in form.cleaned_data as required
             # ...
             # redirect to a new URL:
+            threshold = 50
             sex = form.cleaned_data.get('sex')
             age = form.cleaned_data.get('age')
             employment = form.cleaned_data.get('employment')
@@ -136,17 +144,29 @@ def w3b(request):
             else:
                 df['typeOfResidence_City or urban area'] = 1
             
-            prob8 = clf7.predict_proba(df)[0][0]
+                      
+
+            prob1 = round(clf1.predict_proba(df)[0][0]*100 , 2) 
+            prob2 = round(clf2.predict_proba(df)[0][0]*100 , 2) 
+            prob3 = round(clf3.predict_proba(df)[0][0]*100 , 2)
+            prob4 = round(clf4.predict_proba(df)[0][0]*100 , 2)  
+            prob5 = round(clf5.predict_proba(df)[0][0]*100 , 2) 
+            prob6 = round(clf6.predict_proba(df)[0][0]*100 , 2) 
+            prob7 = round(clf7.predict_proba(df)[0][0]*100 , 2)         
+            prob8 = round(clf8.predict_proba(df)[0][0]*100 , 2) 
+        
 
             return render(request, 'app/w3b.html', {'form':form,
-                                                    'prob1':sex,
-                                                    'prob2':age,
-                                                    'prob3':employment,
-                                                    'prob4':education,
-                                                    'prob5':residence,
-                                                    'prob6':threshold,
-                                                    'prob7':90,
-                                                    'prob8':prob8,})
+                                                    'prob1':prob1,
+                                                    'prob2':prob2,
+                                                    'prob3':prob3,
+                                                    'prob4':prob4,
+                                                    'prob5':prob5,
+                                                    'prob6':prob6,
+                                                    'prob7':prob7,
+                                                    'prob8':prob8,
+                                                    'threshold':threshold,
+                                                    })
 
     # if a GET (or any other method) we'll create a blank form
     else:
