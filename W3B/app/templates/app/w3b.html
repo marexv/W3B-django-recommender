@@ -46,6 +46,7 @@
                 <h2>Potential customer information</h2>
             </div>
 
+            <!--
             <div class="row" style="margin-bottom:20px;">
                 <div class="col-md-1" style="margin-top:7px;">
                     <p style="font-size:16px;">SEX:</p>
@@ -99,9 +100,10 @@
                 <option>Urban area</option>
             </select>
         </div>
+        -->
 
+        <!--
         <div class="container">
-
             <div class="page-header">
                 <h2>Threshold selector <small>pre-alpha</small></h2>
             </div>
@@ -148,21 +150,29 @@
                 </div>
             </div>
         </div>
+        -->
         <!-- [Attributes form]-->
-        <form action="/w3b/" method="post">
-            {% csrf_token %}
-            {{ form.sex }}
-            {{ form.age }}
-            {{ form.education }}
-            {{ form.employment }}
-            {{ form.residence }}
-            {{ form.threshold }}
-        <input type="submit" value="Submit" />
-        </form>
+        <div class="container">
+            <div class="row">
+                <form action="/w3b/" method="post">
+                    {% csrf_token %}
+                    {{ form.sex }}
+                    {{ form.age }}
+                    {{ form.education }}
+                    {{ form.employment }}
+                    {{ form.residence }}
+                    {{ form.threshold }}
+                <input type="submit" value="Get prediction" />                 
+                </form>
+            </div>
+        </div>
+
         <!-- Get prediction -->
+        <!--
         <div class="container">
             <div id="getPrediction" onclick="randomNumbers()" class="btn btn-default form-control" style="background-color:#2c7a5b; color:white; border-color:#2c7a5b;">GET PREDICTION</div>
         </div>
+        -->
         <!-- [Get prediction] -->
         <!-- Predictions -->
         <div class="container">
